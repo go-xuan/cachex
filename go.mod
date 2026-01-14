@@ -1,4 +1,4 @@
-module github/go-xuan/cachex
+module github.com/go-xuan/cachex
 
 go 1.18
 
