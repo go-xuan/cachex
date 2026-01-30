@@ -1,9 +1,8 @@
 package cachex
 
 import (
-	"github.com/go-xuan/quanx/configx"
-	"github.com/go-xuan/quanx/constx"
-	"github.com/go-xuan/quanx/nacosx"
+	"github.com/go-xuan/configx"
+	"github.com/go-xuan/nacosx"
 	"github.com/go-xuan/utilx/errorx"
 	"github.com/go-xuan/utilx/stringx"
 	log "github.com/sirupsen/logrus"
@@ -65,8 +64,8 @@ func (c *Config) Valid() bool {
 
 func (c *Config) Readers() []configx.Reader {
 	return []configx.Reader{
-		nacosx.NewReader(constx.CacheConfigName),
-		configx.NewFileReader(constx.CacheConfigName),
+		nacosx.NewReader("cache.yaml"),
+		configx.NewFileReader("cache.yaml"),
 	}
 }
 
@@ -113,8 +112,8 @@ func (s Configs) Valid() bool {
 
 func (s Configs) Readers() []configx.Reader {
 	return []configx.Reader{
-		nacosx.NewReader(constx.CacheConfigName),
-		configx.NewFileReader(constx.CacheConfigName),
+		nacosx.NewReader("cache.yaml"),
+		configx.NewFileReader("cache.yaml"),
 	}
 }
 
