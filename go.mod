@@ -8,7 +8,7 @@ require (
 	github.com/go-xuan/typex v1.26.0
 	github.com/go-xuan/utilx v1.26.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
-	github.com/redis/go-redis/v9 v9.17.2
+	github.com/redis/go-redis/v9 v9.17.3
 	github.com/sirupsen/logrus v1.9.4
 )
 
