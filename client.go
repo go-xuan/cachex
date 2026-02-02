@@ -14,14 +14,6 @@ var (
 	builders *typex.Enum[string, ClientBuilder] // 客户端构造函数池
 )
 
-func init() {
-	// 注册本地缓存客户端构建器
-	RegisterClientBuilder("local", LocalClientBuilder)
-
-	// 注册redis缓存客户端构建器
-	RegisterClientBuilder("redis", RedisClientBuilder)
-}
-
 // RegisterClientBuilder 注册客户端构造函数
 func RegisterClientBuilder(name string, builder ClientBuilder) {
 	if builders == nil {
