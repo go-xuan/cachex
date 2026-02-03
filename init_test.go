@@ -1,7 +1,10 @@
 package cachex
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
-func TestCache(t *testing.T) {
-
+func TestConfig(t *testing.T) {
+	fmt.Println(GetClient().GetConfig())
 }
