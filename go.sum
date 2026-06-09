@@ -16,10 +16,10 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-errors/errors v1.0.1 h1:LUHzmkK3GUKUrL/1gfBUxAHzcev3apQlezX/+O7ma6w=
 github.com/go-errors/errors v1.0.1/go.mod h1:f4zRHt4oKfwPJE5k8C9vpYG+aDHdBFUsgrm6/TyX73Q=
-github.com/go-xuan/configx v1.26.10 h1:5TBpQVHQGnAZNxuKs8R/+pEPJUhCb01slX5pOT2ff/E=
-github.com/go-xuan/configx v1.26.10/go.mod h1:qkxvDdcDGKZakuzie6d2wD+OD8oNU+jKxbYLiZzWz+E=
-github.com/go-xuan/nacosx v1.26.10 h1:YIeSyhhcdD5P3aPH9Km14kbkch3CTsv7z1bfMVOeA5I=
-github.com/go-xuan/nacosx v1.26.10/go.mod h1:ZuDdNZasEMuQftzSJPmF1Educ5wYDQ4M86mn1eR3otc=
+github.com/go-xuan/configx v1.26.14 h1:r1pPVR8i4bZksFWuCBc4jNkwhHW1YPTRo12AiFNp0w4=
+github.com/go-xuan/configx v1.26.14/go.mod h1:qkxvDdcDGKZakuzie6d2wD+OD8oNU+jKxbYLiZzWz+E=
+github.com/go-xuan/nacosx v1.26.14 h1:ClnGzDSoTCBIvwv/49TwAl+gQAsZ3HDL2AszItVWrXQ=
+github.com/go-xuan/nacosx v1.26.14/go.mod h1:PFlVLSKWnN+tsvKj7PJn5+yUsJccSAZJyFVQg9GLCcQ=
 github.com/go-xuan/typex v1.26.4 h1:cxYm3zuJ+RYahgI1TI6JC0icxhXpc0aM6BMKOVJFu94=
 github.com/go-xuan/typex v1.26.4/go.mod h1:q7/j65RGZYHwX0PEpPdd8hZCBcusUzwXvJzzyjW5kao=
 github.com/go-xuan/utilx v1.26.6 h1:gikLbEjHj2xwCbmUgQhV7aGBtvarFp3iqI3tdwEKH9s=
