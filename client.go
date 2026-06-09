@@ -2,6 +2,7 @@ package cachex
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"github.com/go-xuan/typex"
@@ -24,15 +25,15 @@ func RegisterClientBuilder(name string, builder ClientBuilder) {
 
 // NewClient 创建客户端
 func NewClient(config *Config) (Client, error) {
-	if config.Builder == "" {
+	if config.Driver == "" {
 		return LocalClientBuilder(config)
 	}
 	if builders != nil {
-		if builder, ok := builders.Exist(config.Builder); ok && builder != nil {
+		if builder, ok := builders.Find(config.Driver); ok && builder != nil {
 			return builder(config)
 		}
 	}
-	return nil, errorx.Sprintf("client builder is not registered: %s", config.Builder)
+	return nil, errorx.Sprintf("client driver is not registered: %s", config.Driver)
 }
 
 // ClientBuilder 客户端构造函数
@@ -107,15 +108,14 @@ func GetRedisUniversalClient(source ...string) redis.UniversalClient {
 	return GetInstance[redis.UniversalClient](source...)
 }
 
-// Close 关闭所有数据库客户端
+// Close 关闭所有缓存客户端
 func Close() error {
-	var err error
+	var errs []error
 	Pool().Range(func(source string, client Client) bool {
-		if err = client.Close(); err != nil {
-			err = errorx.Wrap(err, "close database client failed")
-			return true
+		if err := client.Close(); err != nil {
+			errs = append(errs, errorx.Wrap(err, "close cache client failed"))
 		}
-		return false
+		return true
 	})
-	return err
+	return errors.Join(errs...)
 }
