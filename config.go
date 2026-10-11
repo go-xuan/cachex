@@ -4,7 +4,6 @@ import (
 	"github.com/go-xuan/configx"
 	"github.com/go-xuan/nacosx"
 	"github.com/go-xuan/utilx/errorx"
-	"github.com/go-xuan/utilx/stringx"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -18,7 +17,7 @@ type Config struct {
 	Password string `json:"password" yaml:"password"`                   // 密码
 	Database int    `json:"database" yaml:"database"`                   // 数据库，默认0
 	Prefix   string `json:"prefix" yaml:"prefix"`                       // 缓存key前缀
-	Mode     int    `json:"mode" yaml:"mode"`                           // redis模式（0-单机/1-集群/3-哨兵，默认单机模式）
+	Mode     int    `json:"mode" yaml:"mode"`                           // redis模式（0-单机/1-集群/2-哨兵，默认单机模式）
 	Master   string `json:"master" yaml:"master"`                       // redis哨兵模式主服务器名称
 	PoolSize int    `json:"poolSize" yaml:"poolSize"`                   // redis连接池大小
 	Marshal  string `json:"marshal" yaml:"marshal" default:"json"`      // 序列化方式（json/yaml）
@@ -38,6 +37,7 @@ func (c *Config) Copy() *Config {
 		Prefix:   c.Prefix,
 		Marshal:  c.Marshal,
 		Master:   c.Master,
+		PoolSize: c.PoolSize,
 	}
 }
 
@@ -58,18 +58,30 @@ func (c *Config) GetClientName() string {
 	return c.Driver
 }
 
+// Valid 配置是否有效：读到 driver 或 address 任一关键字段即视为有效
+//
+// 不能用 address 单独判断：本地缓存驱动无需配置 address，那样会把合法的本地缓存配置判为无效
+//
+// 也不在这里要求 redis 驱动必须有 address：configx 在每个 reader 之后检查 Valid 并短路，
+// 若判定无效，会继续放行 TagReader 把 address 填成 default tag 里的 "localhost"，
+// 反而把一个明确的配置错误掩盖成"初始化成功但永远连不上"。
+// address 是否可用由 NewRedisUniversalClient 在建立连接前校验
 func (c *Config) Valid() bool {
-	return c.Address != ""
+	return c.Driver != "" || c.Address != ""
 }
 
 func (c *Config) Readers() []configx.Reader {
 	return []configx.Reader{
 		nacosx.NewReader("cache.yaml"),
 		configx.NewFileReader("cache.yaml"),
+		configx.NewTagReader(), // 兜底填充结构体上的 default tag
 	}
 }
 
 func (c *Config) Execute() error {
+	if c.Source == "" {
+		c.Source = "default" // 兜底默认源名称，避免客户端池出现空字符串键
+	}
 	if c.Enable {
 		logger := log.WithFields(c.LogFields())
 		client, err := NewClient(c)
@@ -91,13 +103,12 @@ func (c *Config) GetKey(key string) string {
 	return key
 }
 
-// GetKeys 获取缓存keys
+// GetKeys 获取缓存keys，前缀规则与 GetKey 保持一致
 func (c *Config) GetKeys(keys []string) []string {
 	if len(keys) > 0 && c.Prefix != "" {
-		var newKeys []string
-		prefix := stringx.AddSuffix(c.Prefix, ":")
+		newKeys := make([]string, 0, len(keys))
 		for _, key := range keys {
-			newKeys = append(newKeys, prefix+key)
+			newKeys = append(newKeys, c.GetKey(key))
 		}
 		return newKeys
 	}

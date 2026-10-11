@@ -3,6 +3,7 @@ module github.com/go-xuan/cachex
 go 1.25
 
 require (
+	github.com/alicebob/miniredis/v2 v2.40.0
 	github.com/go-xuan/configx v1.26.14
 	github.com/go-xuan/nacosx v1.26.14
 	github.com/go-xuan/typex v1.26.4
@@ -27,6 +28,7 @@ require (
 	github.com/nacos-group/nacos-sdk-go v1.1.6 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
+	github.com/yuin/gopher-lua v1.1.1 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.5.0 // indirect
 	go.uber.org/zap v1.15.0 // indirect
