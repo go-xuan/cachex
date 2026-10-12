@@ -13,7 +13,7 @@ func TestConfigCopy(t *testing.T) {
 		Database: 1,
 		Prefix:   "app:",
 		Mode:     ModeCluster,
-		Master:   "mymaster",
+		Master:   "master",
 		PoolSize: 100,
 		Marshal:  "json",
 	}

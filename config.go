@@ -42,8 +42,8 @@ func (c *Config) Copy() *Config {
 }
 
 // LogFields 日志字段
-func (c *Config) LogFields() map[string]interface{} {
-	fields := make(map[string]interface{})
+func (c *Config) LogFields() map[string]any {
+	fields := make(map[string]any)
 	fields["source"] = c.Source
 	fields["builder"] = c.Driver
 	fields["address"] = c.Address

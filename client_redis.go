@@ -53,7 +53,7 @@ func NewRedisClient(config *Config) (*RedisClient, error) {
 func parseRedisAddrs(address string) ([]string, error) {
 	// 去除地址中的空格，避免 "host:port, host:port" 形式的配置连接失败
 	var addrs []string
-	for _, addr := range strings.Split(strings.ReplaceAll(address, " ", ""), ",") {
+	for addr := range strings.SplitSeq(strings.ReplaceAll(address, " ", ""), ",") {
 		if addr == "" {
 			continue
 		}
@@ -118,7 +118,7 @@ func (c *RedisClient) GetConfig() *Config {
 	return c.config
 }
 
-func (c *RedisClient) GetInstance() interface{} {
+func (c *RedisClient) GetInstance() any {
 	return c.client
 }
 
@@ -218,7 +218,7 @@ func (c *RedisClient) MSet(ctx context.Context, values map[string]any, expiratio
 	if len(values) == 0 {
 		return nil
 	}
-	pairs := make([]interface{}, 0, len(values)*2)
+	pairs := make([]any, 0, len(values)*2)
 	for key, value := range values {
 		bytes, err := c.marshal.Marshal(value)
 		if err != nil {
