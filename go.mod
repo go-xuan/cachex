@@ -4,10 +4,10 @@ go 1.26.0
 
 require (
 	github.com/alicebob/miniredis/v2 v2.40.0
-	github.com/go-xuan/configx v1.26.14
-	github.com/go-xuan/nacosx v1.26.14
-	github.com/go-xuan/typex v1.26.4
-	github.com/go-xuan/utilx v1.26.6
+	github.com/go-xuan/configx v1.26.15
+	github.com/go-xuan/nacosx v1.26.15
+	github.com/go-xuan/typex v1.26.5
+	github.com/go-xuan/utilx v1.26.7
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/redis/go-redis/v9 v9.23.0
 	github.com/sirupsen/logrus v1.10.2
@@ -22,7 +22,7 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
 	github.com/json-iterator/go v1.1.6 // indirect
-	github.com/magiconair/properties v1.8.10 // indirect
+	github.com/magiconair/properties v1.18.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742 // indirect
 	github.com/nacos-group/nacos-sdk-go v1.1.6 // indirect
